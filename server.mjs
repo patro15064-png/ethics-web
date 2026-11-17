@@ -7,7 +7,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(ROOT, 'data');
 const DATA_FILE = path.join(DATA_DIR, 'cybersafe-stats.json');
 const PORT = Number(process.env.PORT || process.env.MANUS_PORT || 3000);
-const HOST = process.env.HOST || '127.0.0.1';
+const HOST = process.env.HOST || (process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1');
 
 const defaults = {
   visits: 0,
