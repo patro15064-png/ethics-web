@@ -106,23 +106,37 @@ function setupParticles() {
     width = Math.max(1, rect.width); height = Math.max(1, rect.height);
     canvas.width = width * dpr; canvas.height = height * dpr; canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = window.innerWidth < 600 ? 24 : 50;
-    particles = Array.from({ length: count }, (_, index) => ({ x: Math.random() * width, y: height * (.15 + Math.random() * .8), r: .6 + Math.random() * 1.8, a: .12 + Math.random() * .35, vx: -.08 + Math.random() * .16, vy: -.08 + Math.random() * .08, phase: index * .47 }));
+    const count = window.innerWidth < 600 ? 40 : 85;
+    particles = Array.from({ length: count }, (_, index) => ({
+      x: Math.random() * width,
+      y: height * (.1 + Math.random() * .85),
+      r: 1.0 + Math.random() * 2.0,
+      a: .25 + Math.random() * .4,
+      vx: -.35 + Math.random() * .7,
+      vy: -.25 + Math.random() * .5,
+      phase: index * .47
+    }));
   };
   const draw = (time = 0) => {
+    if (canvas.dataset.inactive === 'true') { raf = 0; return; }
     if (!active || hidden) { raf = 0; return; }
     context.clearRect(0, 0, width, height);
     particles.forEach((particle) => {
       particle.x += particle.vx; particle.y += particle.vy;
       if (particle.x < -10) particle.x = width + 10; if (particle.x > width + 10) particle.x = -10;
       if (particle.y < 0) particle.y = height; if (particle.y > height) particle.y = 0;
-      const glow = particle.a + Math.sin(time * .0007 + particle.phase) * .1;
-      context.beginPath(); context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2); context.fillStyle = `rgba(198,241,53,${Math.max(.03, glow)})`; context.fill();
+      const glow = particle.a + Math.sin(time * .0015 + particle.phase) * .15;
+      context.beginPath(); context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2); context.fillStyle = `rgba(198,241,53,${Math.max(.05, glow)})`; context.fill();
     });
     for (let i = 0; i < particles.length; i += 1) {
       for (let j = i + 1; j < particles.length; j += 1) {
         const a = particles[i]; const b = particles[j]; const distance = Math.hypot(a.x - b.x, a.y - b.y);
-        if (distance < 110) { context.beginPath(); context.moveTo(a.x, a.y); context.lineTo(b.x, b.y); context.strokeStyle = `rgba(34,211,238,${.07 * (1 - distance / 110)})`; context.stroke(); }
+        if (distance < 140) {
+          context.beginPath(); context.moveTo(a.x, a.y); context.lineTo(b.x, b.y);
+          context.strokeStyle = `rgba(34,211,238,${.16 * (1 - distance / 140)})`;
+          context.lineWidth = 1;
+          context.stroke();
+        }
       }
     }
     raf = requestAnimationFrame(draw);
@@ -242,18 +256,35 @@ function renderQr(container, url, label) {
   } catch { qrFallback(container, url); }
 }
 
+const FEEDBACK_FORM_URL = 'https://www.template.net/share/6afc561b71ea5b37a4cd76bf/guest';
+
 function setupQrs() {
   const websiteUrl = SITE_URL || window.location.origin;
-  const feedbackUrl = `${window.location.href.split('#')[0]}#feedback-form`;
+  const feedbackUrl = FEEDBACK_FORM_URL;
   const websiteQr = $('#website-qr'); const feedbackQr = $('#feedback-qr'); const urlLabel = $('#site-url-label');
   if (urlLabel) urlLabel.textContent = websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') || 'Current exhibition';
-  const draw = () => { renderQr(feedbackQr, feedbackUrl, 'Feedback form QR code'); renderQr(websiteQr, websiteUrl, 'Website QR code'); };
+  const draw = () => {
+    if (feedbackQr) {
+      feedbackQr.innerHTML = '<img src="google-form-qr.png" alt="Online Feedback Form QR Code" style="width:100%;height:auto;display:block;border-radius:4px;">';
+      feedbackQr.dataset.qrUrl = feedbackUrl;
+    }
+    renderQr(websiteQr, websiteUrl, 'Website QR code');
+  };
   draw(); window.setTimeout(draw, 900);
   $$('[data-download-qr]').forEach((button) => button.addEventListener('click', () => {
-    const container = document.getElementById(button.dataset.downloadQr); const svg = $('svg', container);
-    if (!svg) return;
-    const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>${svg.outerHTML}`], { type: 'image/svg+xml;charset=utf-8' });
-    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = `${button.dataset.downloadQr}.svg`; link.click(); URL.revokeObjectURL(link.href);
+    const targetId = button.dataset.downloadQr;
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    const svg = $('svg', container);
+    if (svg) {
+      const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>${svg.outerHTML}`], { type: 'image/svg+xml;charset=utf-8' });
+      const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = `${targetId}.svg`; link.click(); URL.revokeObjectURL(link.href);
+    } else {
+      const img = $('img', container);
+      if (img) {
+        const link = document.createElement('a'); link.href = img.src; link.download = 'google-form-qr.png'; link.click();
+      }
+    }
   }));
 }
 

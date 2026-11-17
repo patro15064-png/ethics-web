@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galaxy 1 — 500,000 GPU Particles Real-Time Simulation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2305070A'/%3E%3Cpath d='M32 10 48 16v13c0 12-6.7 20.8-16 25-9.3-4.2-16-13-16-25V16l16-6Z' fill='none' stroke='%23C6F135' stroke-width='4'/%3E%3Cpath d='M23 31h18M32 22v18' stroke='%2322D3EE' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #05070a;
+      --card: rgba(11, 16, 22, 0.78);
+      --line: rgba(215, 226, 231, 0.18);
+      --lime: #c6f135;
+      --cyan: #22d3ee;
+      --text: #f2f5f4;
+      --muted: #a7b0b1;
+      --dim: #6e7a7d;
+      --display: "Space Grotesk", sans-serif;
+      --body: "Inter", sans-serif;
+      --mono: "SFMono-Regular", Consolas, monospace;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000000; color: var(--text); font-family: var(--body); }
+    #viewport { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    /* HUD Layer */
+    .hud-layer { position: absolute; inset: 0; pointer-events: none; z-index: 10; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(1rem, 3vw, 2rem); }
+    .hud-interactive { pointer-events: auto; }
+
+    /* Top Bar */
+    .hud-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .hud-brand { display: flex; flex-direction: column; gap: 0.35rem; }
+    .hud-kicker { font: 600 0.65rem var(--mono); color: var(--lime); letter-spacing: 0.16em; text-transform: uppercase; }
+    .hud-title { font: 700 clamp(1.5rem, 3vw, 2.4rem)/1 var(--display); letter-spacing: -0.04em; }
+    .hud-title span { color: var(--cyan); font-weight: 400; }
+    .hud-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.6rem; border-radius: 999px; background: rgba(198,241,53,0.1); border: 1px solid rgba(198,241,53,0.3); font: 600 0.68rem var(--mono); color: var(--lime); }
+    .hud-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 8px var(--lime); }
+
+    /* Top Right Actions */
+    .hud-actions { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+    .hud-btn { appearance: none; border: 1px solid var(--line); border-radius: 999px; background: rgba(5,7,10,0.7); backdrop-filter: blur(12px); padding: 0.55rem 1rem; color: var(--text); font: 600 0.72rem var(--mono); letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .hud-btn:hover { border-color: var(--lime); color: var(--lime); background: rgba(198,241,53,0.12); box-shadow: 0 0 14px rgba(198,241,53,0.2); }
+    .hud-btn.active { border-color: var(--lime); background: var(--lime); color: #05070a; font-weight: 700; }
+
+    /* Telemetry Panel (Left) */
+    .hud-telemetry { position: absolute; left: clamp(1rem, 3vw, 2rem); top: 50%; transform: translateY(-50%); width: 220px; padding: 1.1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--card); backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 0.8rem; }
+    .tel-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.4rem; }
+    .tel-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .tel-label { font: 600 0.62rem var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; }
+    .tel-val { font: 700 0.78rem var(--mono); color: var(--lime); }
+    .tel-val.cyan { color: var(--cyan); }
+
+    /* Bottom Control Bar */
+    .hud-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; }
+    .hud-hint { display: flex; align-items: center; gap: 0.6rem; font: 500 0.75rem var(--mono); color: var(--muted); background: rgba(5,7,10,0.65); padding: 0.5rem 0.9rem; border-radius: 999px; border: 1px solid var(--line); backdrop-filter: blur(8px); }
+    .hud-hint span { color: var(--lime); }
+    .hud-palette-group { display: flex; gap: 0.4rem; background: rgba(5,7,10,0.7); padding: 0.3rem; border-radius: 999px; border: 1px solid var(--line); backdrop-filter: blur(10px); }
+
+    /* Crosshair HUD graphics */
+    .hud-crosshair { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border: 1px dashed rgba(34,211,238,0.15); border-radius: 50%; pointer-events: none; }
+    .hud-crosshair::before, .hud-crosshair::after { content: ""; position: absolute; background: rgba(198,241,53,0.25); }
+    .hud-crosshair::before { width: 12px; height: 1px; top: 50%; left: -6px; }
+    .hud-crosshair::after { width: 1px; height: 12px; left: 50%; top: -6px; }
+
+    @media (max-width: 768px) {
+      .hud-telemetry { display: none; }
+      .hud-footer { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <div id="viewport"></div>
+
+  <!-- HUD Overlay -->
+  <div class="hud-layer">
+    <!-- Header -->
+    <header class="hud-header">
+      <div class="hud-brand">
+        <div class="hud-kicker">REAL-TIME GPU PARTICLE ENGINE</div>
+        <h1 class="hud-title">Galaxy 1 <span>/ Var. 7859</span></h1>
+        <div style="display:flex;gap:.5rem;align-items:center;margin-top:.2rem;">
+          <span class="hud-badge"><span class="hud-badge-dot"></span><span id="particle-readout">500,000 PARTICLES</span></span>
+          <span class="hud-badge" style="border-color:rgba(34,211,238,0.3);color:var(--cyan)"><span class="hud-badge-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span><span id="fps-readout">60 FPS</span></span>
+        </div>
+      </div>
+
+      <div class="hud-actions hud-interactive">
+        <button class="hud-btn" id="btn-reset-cam" title="Reset Camera View">⟲ Reset Cam</button>
+        <button class="hud-btn" id="btn-fullscreen" title="Toggle Fullscreen">⛶ Fullscreen</button>
+        <a class="hud-btn" href="/" title="Return to CyberSafe Exhibition">← Back to Exhibition</a>
+      </div>
+    </header>
+
+    <!-- Center HUD Reticle -->
+    <div class="hud-crosshair" aria-hidden="true"></div>
+
+    <!-- Telemetry Sidebar -->
+    <aside class="hud-telemetry">
+      <div class="tel-row"><span class="tel-label">Spiral Arms</span><span class="tel-val">2</span></div>
+      <div class="tel-row"><span class="tel-label">Arm Curl</span><span class="tel-val">1.42</span></div>
+      <div class="tel-row"><span class="tel-label">Core Bulge</span><span class="tel-val">1.00</span></div>
+      <div class="tel-row"><span class="tel-label">Thickness</span><span class="tel-val">1.00</span></div>
+      <div class="tel-row"><span class="tel-label">Smoke Wisps</span><span class="tel-val">0.17</span></div>
+      <div class="tel-row"><span class="tel-label">Turbulence</span><span class="tel-val cyan">0.49</span></div>
+      <div class="tel-row"><span class="tel-label">Swirl Size</span><span class="tel-val cyan">2.61</span></div>
+      <div class="tel-row"><span class="tel-label">Stringiness</span><span class="tel-val cyan">0.39</span></div>
+      <div class="tel-row"><span class="tel-label">Sparkle</span><span class="tel-val">0.79</span></div>
+      <div class="tel-row"><span class="tel-label">Liveliness</span><span class="tel-val">0.33</span></div>
+      <div class="tel-row"><span class="tel-label">Speed</span><span class="tel-val">1.28</span></div>
+      <div class="tel-row"><span class="tel-label">Cursor Mode</span><span class="tel-val cyan">PULL (0.19)</span></div>
+      <div class="tel-row"><span class="tel-label">Cam FOV</span><span class="tel-val">35.0°</span></div>
+      <div class="tel-row"><span class="tel-label">Cam Angle</span><span class="tel-val" id="cam-angle-val">35.1°</span></div>
+      <div class="tel-row"><span class="tel-label">Cam Height</span><span class="tel-val" id="cam-height-val">26.1°</span></div>
+    </aside>
+
+    <!-- Footer Controls -->
+    <footer class="hud-footer">
+      <div class="hud-hint">
+        <span>⇲ Drag with Mouse</span> to orbit galaxy · <span>Hover</span> to pull particles
+      </div>
+
+      <div class="hud-palette-group hud-interactive">
+        <button class="hud-btn active" id="btn-palette-cyber">CyberSafe HUD</button>
+        <button class="hud-btn" id="btn-palette-cosmic">Cosmic Blue</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Three.js & Galaxy 1 Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="galaxy-1.js"></script>
+  <script>
+    let sim;
+    window.addEventListener('DOMContentLoaded', () => {
+      const viewport = document.getElementById('viewport');
+      sim = new Galaxy1Simulation(viewport, {
+        particles: 500000,
+        theme: 'cybersafe'
+      });
+
+      // Update particle readout
+      const pReadout = document.getElementById('particle-readout');
+      if (pReadout && sim.particleCount) {
+        pReadout.textContent = `${sim.particleCount.toLocaleString()} PARTICLES`;
+      }
+
+      // FPS Counter
+      let frameCount = 0;
+      let lastTime = performance.now();
+      const fpsReadout = document.getElementById('fps-readout');
+      const camAngle = document.getElementById('cam-angle-val');
+      const camHeight = document.getElementById('cam-height-val');
+
+      function updateHUD() {
+        frameCount++;
+        const now = performance.now();
+        if (now - lastTime >= 500) {
+          const fps = Math.round((frameCount * 1000) / (now - lastTime));
+          if (fpsReadout) fpsReadout.textContent = `${fps} FPS`;
+          frameCount = 0;
+          lastTime = now;
+        }
+
+        if (sim && camAngle && camHeight) {
+          const degA = ((sim.currentAngle * 180 / Math.PI) % 360).toFixed(1);
+          const degH = (sim.currentHeight * 180 / Math.PI).toFixed(1);
+          camAngle.textContent = `${degA}°`;
+          camHeight.textContent = `${degH}°`;
+        }
+
+        requestAnimationFrame(updateHUD);
+      }
+      requestAnimationFrame(updateHUD);
+
+      // Palette Switcher
+      const btnCyber = document.getElementById('btn-palette-cyber');
+      const btnCosmic = document.getElementById('btn-palette-cosmic');
+
+      btnCyber?.addEventListener('click', () => {
+        sim.setTheme('cybersafe');
+        btnCyber.classList.add('active');
+        btnCosmic.classList.remove('active');
+      });
+
+      btnCosmic?.addEventListener('click', () => {
+        sim.setTheme('cosmic');
+        btnCosmic.classList.add('active');
+        btnCyber.classList.remove('active');
+      });
+
+      // Reset Camera
+      document.getElementById('btn-reset-cam')?.addEventListener('click', () => {
+        sim.currentAngle = 35.1 * Math.PI / 180;
+        sim.currentHeight = 26.1 * Math.PI / 180;
+        sim.currentDistance = 5.5;
+        sim.updateCameraPosition();
+      });
+
+      // Fullscreen
+      document.getElementById('btn-fullscreen')?.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+    });
+  </script>
+</body>
+</html>

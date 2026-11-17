@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(ROOT, 'data');
 const DATA_FILE = path.join(DATA_DIR, 'cybersafe-stats.json');
+const FEEDBACK_FILE = path.join(DATA_DIR, 'cybersafe-feedback.json');
 const PORT = Number(process.env.PORT || process.env.MANUS_PORT || 3000);
 const HOST = process.env.HOST || (process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1');
 
@@ -35,6 +36,22 @@ async function writeStats(stats) {
   }
 }
 
+async function readFeedback() {
+  try {
+    const raw = await fs.readFile(FEEDBACK_FILE, 'utf8');
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+async function writeFeedback(entries) {
+  try {
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.writeFile(FEEDBACK_FILE, JSON.stringify(entries, null, 2));
+  } catch {}
+}
+
 function json(res, status, payload) {
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
@@ -46,7 +63,14 @@ function json(res, status, payload) {
 
 function safePath(urlPath) {
   const pathname = decodeURIComponent(urlPath.split('?')[0]);
-  const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
+  if (pathname === '/' || pathname === '') return path.resolve(ROOT, 'index.html');
+  if (pathname === '/admin' || pathname === '/admin/' || pathname === '/feedbacks' || pathname === '/dashboard') {
+    return path.resolve(ROOT, 'admin.html');
+  }
+  if (pathname === '/galaxy' || pathname === '/galaxy/' || pathname === '/galaxy-1') {
+    return path.resolve(ROOT, 'galaxy.html');
+  }
+  const relative = pathname.replace(/^\/+/, '');
   const resolved = path.resolve(ROOT, relative);
   return resolved.startsWith(ROOT) ? resolved : null;
 }
@@ -59,6 +83,10 @@ function contentType(filePath) {
     '.js': 'text/javascript; charset=utf-8',
     '.json': 'application/json; charset=utf-8',
     '.svg': 'image/svg+xml',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.webp': 'image/webp',
     '.ico': 'image/x-icon',
     '.txt': 'text/plain; charset=utf-8'
   }[ext] || 'application/octet-stream';
@@ -113,7 +141,31 @@ async function api(req, res, pathname) {
     stats.feedbackSubmissions += 1;
     stats.updatedAt = new Date().toISOString();
     await writeStats(stats);
+    const entries = await readFeedback();
+    entries.push({
+      id: stats.feedbackSubmissions,
+      fullName: String(payload.fullName || '').trim(),
+      exhibitionRating: Number(payload.exhibitionRating) || 0,
+      websiteRating: Number(payload.websiteRating) || 0,
+      vibesRating: Number(payload.vibesRating) || 0,
+      favoriteSection: String(payload.favoriteSection || '').trim(),
+      comments: String(payload.comments || '').trim(),
+      submittedAt: new Date().toISOString()
+    });
+    await writeFeedback(entries);
     return json(res, 200, { saved: true, hasName: Boolean(String(payload.fullName || '').trim()) });
+  }
+  if (req.method === 'GET' && pathname === '/api/feedback') {
+    const entries = await readFeedback();
+    return json(res, 200, { entries, total: entries.length });
+  }
+  if (req.method === 'DELETE' && pathname === '/api/feedback') {
+    await writeFeedback([]);
+    const stats = await readStats();
+    stats.feedbackSubmissions = 0;
+    stats.updatedAt = new Date().toISOString();
+    await writeStats(stats);
+    return json(res, 200, { ok: true, cleared: true });
   }
   return json(res, 404, { ok: false, error: 'not_found' });
 }

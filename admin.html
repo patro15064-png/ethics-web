@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberSafe — Feedback Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2305070A'/%3E%3Cpath d='M32 10 48 16v13c0 12-6.7 20.8-16 25-9.3-4.2-16-13-16-25V16l16-6Z' fill='none' stroke='%23C6F135' stroke-width='4'/%3E%3Cpath d='M23 31h18M32 22v18' stroke='%2322D3EE' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #05070a; --ink-2: #0b0d10; --ink-3: #11161a;
+      --card: rgba(58,61,66,.9); --line: rgba(215,226,231,.16);
+      --text: #f2f5f4; --muted: #a7b0b1; --dim: #6e7a7d;
+      --lime: #c6f135; --cyan: #22d3ee; --danger: #ff7e78;
+      --display: "Space Grotesk","Segoe UI",sans-serif;
+      --body: "Inter","Segoe UI",sans-serif;
+      --mono: "SFMono-Regular",Consolas,"Liberation Mono",monospace;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+    a { color: var(--lime); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell { max-width: 1160px; margin: 0 auto; padding: 2rem clamp(1.25rem,4vw,3rem); }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+    .top-bar h1 { margin: 0; font: 600 clamp(1.6rem,4vw,2.5rem)/1 var(--display); letter-spacing: -.04em; }
+    .actions { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+    .kicker { font: 600 .64rem var(--mono); letter-spacing: .15em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.2rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 1rem; margin-bottom: 3rem; }
+    .stat-card { padding: 1.25rem; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); position: relative; overflow: hidden; }
+    .stat-card .label { display: block; margin-bottom: .6rem; color: var(--dim); font: 600 .62rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .stat-card .value { font: 600 clamp(1.8rem,4.5vw,2.8rem)/1 var(--display); color: var(--lime); }
+    .stat-card .value.cyan { color: var(--cyan); }
+    .avg { display: block; margin-top: .4rem; color: var(--muted); font-size: .78rem; }
+    .table-card { border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: .85rem .9rem; border-bottom: 2px solid var(--lime); color: var(--lime); font: 600 .64rem var(--mono); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; background: rgba(5,7,10,.6); }
+    td { padding: .85rem .9rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .85rem; vertical-align: top; }
+    tr:hover td { background: rgba(198,241,53,.04); color: var(--text); }
+    .name { color: var(--text); font-weight: 600; }
+    .rating { display: inline-flex; align-items: center; justify-content: center; width: 1.9rem; height: 1.9rem; border-radius: 6px; font-weight: 700; font-size: .82rem; }
+    .r5 { background: rgba(198,241,53,.2); color: var(--lime); border: 1px solid rgba(198,241,53,.4); }
+    .r4 { background: rgba(34,211,238,.16); color: var(--cyan); border: 1px solid rgba(34,211,238,.3); }
+    .r3 { background: rgba(167,176,177,.15); color: var(--muted); }
+    .r2 { background: rgba(255,126,120,.14); color: var(--danger); }
+    .r1 { background: rgba(255,126,120,.25); color: var(--danger); font-weight: 800; }
+    .comment { max-width: 300px; color: var(--muted); font-size: .82rem; line-height: 1.4; word-break: break-word; }
+    .time { font: .68rem var(--mono); color: var(--dim); white-space: nowrap; }
+    .empty { text-align: center; padding: 4rem 2rem; color: var(--dim); font: 500 1.1rem var(--display); }
+    .empty span { display: block; margin-top: .6rem; font-size: .85rem; font-family: var(--body); }
+    .btn { appearance: none; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); padding: .55rem 1rem; color: var(--lime); cursor: pointer; font: 600 .7rem var(--mono); letter-spacing: .08em; transition: all .2s ease; display: inline-flex; align-items: center; gap: .4rem; }
+    .btn:hover { background: rgba(198,241,53,.12); border-color: var(--lime); }
+    .btn-danger { color: var(--danger); border-color: rgba(255,126,120,.3); }
+    .btn-danger:hover { background: rgba(255,126,120,.15); border-color: var(--danger); }
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="top-bar">
+      <div>
+        <div class="kicker" style="margin-bottom:.3rem">EXHIBITION CONTROL</div>
+        <h1>Feedback Dashboard</h1>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://www.template.net/share/6afc561b71ea5b37a4cd76bf/guest" target="_blank" rel="noopener" style="color:var(--cyan);border-color:rgba(34,211,238,0.3);">Online Form ↗</a>
+        <button class="btn" onclick="exportCSV()">↓ Export CSV</button>
+        <button class="btn" onclick="loadData()">↻ Refresh</button>
+        <button class="btn btn-danger" onclick="clearData()">✕ Clear All</button>
+        <a class="btn" href="/">← Live Site</a>
+      </div>
+    </div>
+
+    <div class="kicker">REAL-TIME METRICS</div>
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card"><span class="label">Total Visits</span><span class="value" id="s-visits">—</span></div>
+      <div class="stat-card"><span class="label">Pledges Taken</span><span class="value cyan" id="s-pledges">—</span></div>
+      <div class="stat-card"><span class="label">Quiz Submissions</span><span class="value" id="s-quiz">—</span></div>
+      <div class="stat-card"><span class="label">Total Feedbacks</span><span class="value cyan" id="s-feedback">—</span></div>
+      <div class="stat-card"><span class="label">Exhibition Rating</span><span class="value" id="s-avg-exhibition">—</span><span class="avg" id="s-avg-exhibition-label">average</span></div>
+      <div class="stat-card"><span class="label">Website Rating</span><span class="value cyan" id="s-avg-website">—</span><span class="avg" id="s-avg-website-label">average</span></div>
+      <div class="stat-card"><span class="label">Vibes Rating</span><span class="value" id="s-avg-vibes">—</span><span class="avg" id="s-avg-vibes-label">average</span></div>
+    </div>
+
+    <div class="kicker">SUBMISSION STREAM</div>
+    <div class="table-card">
+      <div id="table-container"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentEntries = [];
+
+    async function loadData() {
+      let stats = { visits: 0, pledges: 0, quizSubmissions: 0 };
+      let apiEntries = [];
+
+      try {
+        const statsRes = await fetch('/api/stats').then(r => r.json());
+        stats = { ...stats, ...statsRes };
+      } catch (e) {
+        try {
+          const localStats = JSON.parse(localStorage.getItem('cybersafe-local-stats') || '{}');
+          stats = { ...stats, ...localStats };
+        } catch {}
+      }
+
+      try {
+        const feedbackRes = await fetch('/api/feedback').then(r => r.json());
+        apiEntries = feedbackRes.entries || [];
+      } catch (e) {
+        try {
+          const local = JSON.parse(localStorage.getItem('cybersafe-local-feedback') || '[]');
+          apiEntries = local;
+        } catch {}
+      }
+
+      currentEntries = apiEntries;
+
+      document.getElementById('s-visits').textContent = Number(stats.visits || 0).toLocaleString();
+      document.getElementById('s-pledges').textContent = Number(stats.pledges || 0).toLocaleString();
+      document.getElementById('s-quiz').textContent = Number(stats.quizSubmissions || 0).toLocaleString();
+      document.getElementById('s-feedback').textContent = Number(apiEntries.length || 0).toLocaleString();
+
+      if (apiEntries.length > 0) {
+        const avgEx = (apiEntries.reduce((s,e) => s + (Number(e.exhibitionRating) || 0), 0) / apiEntries.length).toFixed(1);
+        const avgWeb = (apiEntries.reduce((s,e) => s + (Number(e.websiteRating) || 0), 0) / apiEntries.length).toFixed(1);
+        const avgVibes = (apiEntries.reduce((s,e) => s + (Number(e.vibesRating) || 0), 0) / apiEntries.length).toFixed(1);
+        document.getElementById('s-avg-exhibition').textContent = avgEx;
+        document.getElementById('s-avg-exhibition-label').textContent = `${avgEx}/5 · ${apiEntries.length} ratings`;
+        document.getElementById('s-avg-website').textContent = avgWeb;
+        document.getElementById('s-avg-website-label').textContent = `${avgWeb}/5 · ${apiEntries.length} ratings`;
+        document.getElementById('s-avg-vibes').textContent = avgVibes;
+        document.getElementById('s-avg-vibes-label').textContent = `${avgVibes}/5 · ${apiEntries.length} ratings`;
+      } else {
+        document.getElementById('s-avg-exhibition').textContent = '—';
+        document.getElementById('s-avg-website').textContent = '—';
+        document.getElementById('s-avg-vibes').textContent = '—';
+      }
+
+      renderTable(apiEntries);
+    }
+
+    function ratingBadge(n) {
+      const v = Number(n) || 0;
+      return `<span class="rating r${v}">${v || '—'}</span>`;
+    }
+
+    function formatTime(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleDateString(undefined, { day: '2-digit', month: 'short' }) + ' ' + d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function renderTable(entries) {
+      const container = document.getElementById('table-container');
+      if (!entries.length) {
+        container.innerHTML = '<div class="empty">No feedback received yet<span>Submissions from the exhibition website will appear here in real time.</span></div>';
+        return;
+      }
+
+      const reversed = [...entries].reverse();
+      container.innerHTML = `
+        <table>
+          <thead><tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Exhibition</th>
+            <th>Website</th>
+            <th>Vibes</th>
+            <th>Favorite Section</th>
+            <th>Comments</th>
+            <th>Submitted</th>
+          </tr></thead>
+          <tbody>
+            ${reversed.map((e, idx) => `<tr>
+              <td style="color:var(--dim);font:600 .7rem var(--mono)">${e.id || (entries.length - idx)}</td>
+              <td class="name">${escHtml(e.fullName || 'Anonymous')}</td>
+              <td>${ratingBadge(e.exhibitionRating)}</td>
+              <td>${ratingBadge(e.websiteRating)}</td>
+              <td>${ratingBadge(e.vibesRating)}</td>
+              <td>${escHtml(e.favoriteSection || '—')}</td>
+              <td class="comment">${escHtml(e.comments || '—')}</td>
+              <td class="time">${formatTime(e.submittedAt || e.savedAt)}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function exportCSV() {
+      if (!currentEntries.length) {
+        alert('No feedback entries to export.');
+        return;
+      }
+      const headers = ['ID', 'Full Name', 'Exhibition Rating', 'Website Rating', 'Vibes Rating', 'Favorite Section', 'Comments', 'Submitted At'];
+      const rows = currentEntries.map(e => [
+        e.id || '',
+        `"${(e.fullName || '').replace(/"/g, '""')}"`,
+        e.exhibitionRating || '',
+        e.websiteRating || '',
+        e.vibesRating || '',
+        `"${(e.favoriteSection || '').replace(/"/g, '""')}"`,
+        `"${(e.comments || '').replace(/"/g, '""')}"`,
+        e.submittedAt || e.savedAt || ''
+      ]);
+      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `cybersafe-feedback-${new Date().toISOString().slice(0,10)}.csv`);
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    async function clearData() {
+      if (!confirm('Are you sure you want to clear all feedback submissions? This cannot be undone.')) return;
+      try {
+        await fetch('/api/feedback', { method: 'DELETE' });
+      } catch {}
+      try { localStorage.removeItem('cybersafe-local-feedback'); } catch {}
+      await loadData();
+    }
+
+    loadData();
+    setInterval(() => { if (!document.hidden) loadData(); }, 30000);
+  </script>
+</body>
+</html>
