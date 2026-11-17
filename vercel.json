@@ -1,6 +1,7 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "installCommand": "node -e \"\"",
   "rewrites": [
     { "source": "/galaxy", "destination": "/galaxy.html" },
     { "source": "/galaxy-1", "destination": "/galaxy.html" },
