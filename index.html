@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05070A">
+  <meta name="description" content="A plain-language guide to recognizing digital threats and protecting yourself every day.">
+  <meta property="og:title" content="Cybercrime: what it is and how to stay safe">
+  <meta property="og:description" content="A plain-language digital safety briefing for everyday internet users.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%2305070A'/%3E%3Cpath d='M0 510C240 410 380 590 640 470s360-60 560 5v155H0Z' fill='%23101b17'/%3E%3Ctext x='72' y='166' fill='%23C6F135' font-family='Arial' font-size='24' letter-spacing='4'%3EDIGITAL SAFETY BRIEFING%3C/text%3E%3Ctext x='72' y='260' fill='white' font-family='Arial' font-size='68' font-weight='700'%3ECybercrime:%3C/text%3E%3Ctext x='72' y='336' fill='white' font-family='Arial' font-size='68' font-weight='700'%3Ewhat it is and how to stay safe%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2305070A'/%3E%3Cpath d='M32 10 48 16v13c0 12-6.7 20.8-16 25-9.3-4.2-16-13-16-25V16l16-6Z' fill='none' stroke='%23C6F135' stroke-width='4'/%3E%3Cpath d='M23 31h18M32 22v18' stroke='%2322D3EE' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <title>Cybercrime: what it is and how to stay safe</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js" defer></script>
+  <script src="anime-fallback.js" defer></script>
+  <script src="vendor/qrcode-generator.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="progress-track" aria-hidden="true"><span id="scroll-progress"></span></div>
+  <header class="site-header">
+    <a class="brand" href="#hero" aria-label="Cybercrime awareness exhibition home">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 40 11v13c0 11-6.7 18.2-16 22-9.3-3.8-16-11-16-22V11l16-6Z"/><path d="M15 25h18M24 16v18"/></svg></span>
+      <span class="brand-copy"><strong>CYBER / SAFE</strong><small>Awareness exhibition</small></span>
+    </a>
+    <div class="header-meta"><span class="status-dot"></span><span id="visit-count">Briefing live</span></div>
+  </header>
+
+  <nav class="dot-nav" aria-label="Exhibition sections">
+    <button type="button" data-target="hero" aria-label="Go to Hero" aria-current="true"><span></span></button>
+    <button type="button" data-target="definition" aria-label="Go to Definition and Reality"><span></span></button>
+    <button type="button" data-target="threats" aria-label="Go to Three threats"><span></span></button>
+    <button type="button" data-target="phishing" aria-label="Go to Phishing"><span></span></button>
+    <button type="button" data-target="identity" aria-label="Go to Identity theft"><span></span></button>
+    <button type="button" data-target="malware" aria-label="Go to Malware"><span></span></button>
+    <button type="button" data-target="impact" aria-label="Go to Impact"><span></span></button>
+    <button type="button" data-target="prevention" aria-label="Go to Prevention"><span></span></button>
+    <button type="button" data-target="response" aria-label="Go to Incident response"><span></span></button>
+    <button type="button" data-target="conclusion" aria-label="Go to Conclusion"><span></span></button>
+    <button type="button" data-target="feedback" aria-label="Go to Rate the Exhibition"><span></span></button>
+  </nav>
+
+  <main id="main-content">
+    <section class="section hero-section" id="hero" data-section="hero" aria-labelledby="hero-title">
+      <canvas id="particle-canvas" aria-hidden="true"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="section-inner hero-inner">
+        <div class="eyebrow reveal">DIGITAL SAFETY BRIEFING | AWARENESS GUIDE</div>
+        <div class="hero-layout">
+          <div>
+            <h1 id="hero-title" class="hero-title reveal-title">Cybercrime: what it is and how to stay safe</h1>
+            <p class="hero-subtitle reveal">A plain-language guide to recognizing digital threats and protecting yourself every day.</p>
+            <p class="hero-tagline reveal"><span></span>Practical security habits · No technical background needed</p>
+            <div class="hero-actions reveal">
+              <a class="button button-primary" href="#definition">Start exploring <span aria-hidden="true">↘</span></a>
+              <a class="button button-ghost" href="#feedback">Rate the exhibition <span aria-hidden="true">↘</span></a>
+            </div>
+          </div>
+          <div class="signal-card reveal" aria-label="Briefing status">
+            <div class="signal-card-top"><span>FIELD NOTE 001</span><span class="signal-live">LIVE</span></div>
+            <div class="signal-orbit"><span class="orbit-ring ring-one"></span><span class="orbit-ring ring-two"></span><span class="orbit-core"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5 40 11v13c0 11-6.7 18.2-16 22-9.3-3.8-16-11-16-22V11l16-6Z"/><path d="M15 25h18M24 16v18"/></svg></span></div>
+            <p>Most attacks do not begin with a broken device. They begin with a believable moment.</p>
+            <div class="signal-card-foot"><span>PAUSE</span><span>VERIFY</span><span>ACT</span></div>
+          </div>
+        </div>
+        <div class="scroll-cue reveal"><span class="scroll-line"></span><span>Scroll to brief</span></div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="definition" data-section="definition" aria-labelledby="definition-title">
+      <div class="section-inner split-layout">
+        <div class="section-kicker reveal"><span>01</span><span>DEFINITION &amp; REALITY</span></div>
+        <div class="section-main">
+          <h2 id="definition-title" class="section-title reveal">Cybercrime is crime committed with computers or the internet</h2>
+          <div class="rule-line reveal"></div>
+          <div class="three-points">
+            <article class="info-row reveal"><div class="info-index">A</div><div><h3>Old crimes, new medium</h3><p>Theft, fraud and threats use phones, email and browsers; online forms replace fake paperwork.</p></div><span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 12h28v24H10zM16 18h16M16 25h10"/></svg></span></article>
+            <article class="info-row reveal"><div class="info-index">B</div><div><h3>Targets ordinary people</h3><p>Not just banks and companies, individuals too, often when their guard is down.</p></div><span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="17" r="7"/><path d="M11 38c1.7-7 6-10 13-10s11.3 3 13 10"/></svg></span></article>
+            <article class="info-row reveal"><div class="info-index">C</div><div><h3>No break-in required</h3><p>Criminals trick people into clicking a link or replying with a verification code.</p></div><span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 24h20M25 17l7 7-7 7M37 12v24"/></svg></span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section threat-section" id="threats" data-section="threats" aria-labelledby="threats-title">
+      <div class="section-inner">
+        <div class="section-kicker reveal"><span>02</span><span>THE PATTERN LIBRARY</span></div>
+        <div class="section-heading-row"><div><h2 id="threats-title" class="section-title reveal">Three threats you are most likely to meet</h2><p class="intro-line reveal">Almost every consumer cyber incident starts with one of these three common tactics.</p></div><span class="heading-mark reveal" aria-hidden="true">03 / 03</span></div>
+        <div class="threat-grid">
+          <article class="threat-card threat-phishing reveal"><div class="card-top"><span class="threat-number">01</span><span class="card-arrow">↗</span></div><span class="icon-block" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 12h32v24H8zM8 13l16 13 16-13"/><path d="M31 33 39 41M34 28l8 8"/></svg></span><h3>Phishing</h3><p class="goal-label">GOAL</p><p>Steal passwords or banking credentials.</p><span class="card-line"></span></article>
+          <article class="threat-card threat-identity reveal"><div class="card-top"><span class="threat-number">02</span><span class="card-arrow">↗</span></div><span class="icon-block" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="7"/><path d="M11 39c2-8 6.3-12 13-12s11 4 13 12M35 10l5 5-5 5"/></svg></span><h3>Identity theft</h3><p class="goal-label">GOAL</p><p>Open loans, credit lines or drain assets.</p><span class="card-line"></span></article>
+          <article class="threat-card threat-malware reveal"><div class="card-top"><span class="threat-number">03</span><span class="card-arrow">↗</span></div><span class="icon-block" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M15 18h18v16H15zM20 12v6M28 12v6M20 34v4M28 34v4M9 23h6M33 23h6M9 29h6M33 29h6"/><path d="m24 23 3 4-4 4-3-4 4-4Z"/></svg></span><h3>Malware</h3><p class="goal-label">GOAL</p><p>Hijack devices or extort ransom payments.</p><span class="card-line"></span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section phish-section" id="phishing" data-section="phishing" aria-labelledby="phishing-title">
+      <div class="section-inner split-layout demo-layout">
+        <div class="section-kicker reveal"><span>03</span><span>THREAT 01 / PHISHING</span></div>
+        <div class="section-main"><h2 id="phishing-title" class="section-title reveal">Phishing is a fake message that looks real</h2><p class="lead reveal">It exploits trust and emotion, not device vulnerabilities.</p><div class="rule-line reveal"></div>
+          <div class="red-flag-list"><div class="red-flag reveal"><span>01</span><div><h3>Familiar sender</h3><p>The name may look right while the address tells a different story.</p></div></div><div class="red-flag reveal"><span>02</span><div><h3>Urgency</h3><p>Pressure makes a quick click feel safer than a pause.</p></div></div><div class="red-flag reveal"><span>03</span><div><h3>The trap</h3><p>A link or attachment asks for the one thing it should never need.</p></div></div></div>
+          <p class="rule-of-thumb reveal"><span class="quote-mark">“</span>Legitimate organizations will not threaten account deletion over an unprompted SMS link.</p>
+        </div>
+        <div class="demo-panel reveal" aria-label="Spot the phish interactive demo"><div class="demo-label">SPOT THE PHISH <span>Tap the clues</span></div><div class="phone-frame"><div class="phone-speaker"></div><div class="phone-screen"><div class="phone-status"><span>9:41</span><span>▮▮▮</span></div><div class="notification"><span class="notif-app">MYBANK</span><strong>Security alert</strong><button type="button" class="phish-hotspot" data-flag="sender" aria-label="Inspect sender address">mybank-security.co</button><button type="button" class="phish-hotspot" data-flag="urgent" aria-label="Inspect urgent wording">Your account will be deleted today.</button><button type="button" class="phish-hotspot phish-link" data-flag="link" aria-label="Inspect suspicious link">VERIFY NOW&nbsp; →</button></div><div class="demo-note" id="phish-note" aria-live="polite">Start with any highlighted-looking detail.</div></div></div><div class="demo-result" id="phish-result"><span>0 / 3</span> red flags found</div></div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="identity" data-section="identity" aria-labelledby="identity-title">
+      <div class="section-inner split-layout identity-layout"><div class="section-kicker reveal"><span>04</span><span>THREAT 02 / IDENTITY</span></div><div class="section-main"><h2 id="identity-title" class="section-title reveal">Identity theft turns your details into someone else's tool</h2><div class="rule-line reveal"></div><div class="identity-columns"><article class="identity-card reveal"><span class="identity-icon">⌁</span><h3>What thieves collect</h3><p>Names, addresses, dates of birth, account numbers and the small details that make a fake story believable.</p></article><article class="identity-card reveal"><span class="identity-icon">↗</span><h3>How identity is used</h3><p>Details can become a loan application, a new credit line, a fake support call or a way into an existing account.</p></article><article class="identity-card reveal"><span class="identity-icon">◷</span><h3>Delayed discovery</h3><p>The first clue may arrive as a bill, a credit check or a notification you do not recognize.</p></article></div><p class="side-note reveal"><span class="note-marker"></span> The risk is not only what a criminal knows. It is what they can make someone else believe.</p></div></div>
+    </section>
+
+    <section class="section content-section malware-section" id="malware" data-section="malware" aria-labelledby="malware-title">
+      <div class="section-inner split-layout"><div class="section-kicker reveal"><span>05</span><span>THREAT 03 / MALWARE</span></div><div class="section-main"><h2 id="malware-title" class="section-title reveal">Malware is software built to harm or spy</h2><div class="rule-line reveal"></div><div class="tab-switcher reveal" role="tablist" aria-label="Types of malware"><button type="button" role="tab" aria-selected="true" aria-controls="tab-virus" id="tab-button-virus" data-tab="virus">Viruses &amp; Trojans</button><button type="button" role="tab" aria-selected="false" aria-controls="tab-spy" id="tab-button-spy" data-tab="spy">Spyware &amp; Keyloggers</button><button type="button" role="tab" aria-selected="false" aria-controls="tab-ransom" id="tab-button-ransom" data-tab="ransom">Ransomware</button></div><div class="tab-panels"><article class="tab-panel is-active" role="tabpanel" tabindex="0" id="tab-virus" data-panel="virus"><span class="panel-number">01</span><h3>Viruses &amp; Trojans</h3><p>Malicious code can hide inside a file or pretend to be a useful app. Once opened, it may spread or invite more unwanted software.</p></article><article class="tab-panel" role="tabpanel" tabindex="0" id="tab-spy" data-panel="spy"><span class="panel-number">02</span><h3>Spyware &amp; Keyloggers</h3><p>Spyware watches activity. Keyloggers record what is typed, including passwords and private messages.</p></article><article class="tab-panel" role="tabpanel" tabindex="0" id="tab-ransom" data-panel="ransom"><span class="panel-number">03</span><h3>Ransomware</h3><p>Ransomware locks files or systems and demands payment. Paying does not guarantee a safe return.</p></article></div><p class="infection-line reveal"><span>ROUTES IN</span> Unexpected attachments <i>·</i> Fake updates <i>·</i> Untrusted downloads <i>·</i> Compromised accounts</p></div></div>
+    </section>
+
+    <section class="section content-section impact-section" id="impact" data-section="impact" aria-labelledby="impact-title">
+      <div class="section-inner impact-inner"><div class="section-kicker reveal"><span>06</span><span>IMPACT</span></div><h2 id="impact-title" class="section-title reveal">The cost is financial and personal</h2><div class="impact-grid"><article class="impact-card reveal"><span class="impact-figure">01</span><h3>Financial damage</h3><p>Stolen money, unauthorized purchases, recovery costs and time spent proving what happened.</p></article><article class="impact-card reveal"><span class="impact-figure">02</span><h3>Personal toll</h3><p>Victims often find the loss of time, security and peace of mind more painful than the initial financial hit.</p></article></div><p class="anyone-line reveal">Anyone can be targeted, whatever their background, age or job.</p></div>
+    </section>
+
+    <section class="section content-section prevention-section" id="prevention" data-section="prevention" aria-labelledby="prevention-title">
+      <div class="section-inner"><div class="section-kicker reveal"><span>07</span><span>PREVENTION</span></div><div class="section-heading-row"><div><h2 id="prevention-title" class="section-title reveal">Three habits block most attacks</h2><p class="intro-line reveal">Small pauses and routine updates remove the easiest openings.</p></div><span class="shield-stamp reveal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 40 11v13c0 11-6.7 18.2-16 22-9.3-3.8-16-11-16-22V11l16-6Z"/><path d="m15 25 6 6 12-13"/></svg></span></div><div class="habit-list"><article class="habit-row reveal"><div class="habit-count">01</div><div class="habit-copy"><h3>Use unique, strong passwords</h3><p>Use a password manager and 16+ character passphrases.</p></div><span class="habit-end">LOCK</span></article><article class="habit-row reveal"><div class="habit-count">02</div><div class="habit-copy"><h3>Pause before you click</h3><p>Check the sender, the request and the destination before you respond.</p></div><span class="habit-end">PAUSE</span></article><article class="habit-row reveal"><div class="habit-count">03</div><div class="habit-copy"><h3>Apply system updates promptly</h3><p>Updates close known gaps before they become someone else's shortcut.</p></div><span class="habit-end">PATCH</span></article></div></div>
+    </section>
+
+    <section class="section content-section response-section" id="response" data-section="response" aria-labelledby="response-title">
+      <div class="section-inner"><div class="section-kicker reveal"><span>08</span><span>INCIDENT RESPONSE</span></div><h2 id="response-title" class="section-title reveal">If something feels off, act fast</h2><p class="lead reveal">Speed matters: banks may be able to recall transfers within the first few hours.</p><div class="timeline"><article class="timeline-step reveal"><div class="timeline-node">1</div><div><span class="step-label">STEP 1</span><h3>Stop immediately</h3><p>Do not click again, reply, or send more information. Screenshot the message if it helps you explain what happened.</p></div></article><article class="timeline-step reveal"><div class="timeline-node">2</div><div><span class="step-label">STEP 2</span><h3>Change credentials</h3><p>Start with the affected account, then secure reused passwords and turn on multi-factor authentication.</p></div></article><article class="timeline-step reveal"><div class="timeline-node">3</div><div><span class="step-label">STEP 3</span><h3>Notify and report</h3><p>Contact your bank or service, tell someone you trust, and report the incident through the relevant channel.</p></div></article></div></div>
+    </section>
+
+    <section class="section content-section conclusion-section" id="conclusion" data-section="conclusion" aria-labelledby="conclusion-title">
+      <div class="section-inner conclusion-inner"><div class="section-kicker reveal"><span>09</span><span>THE TAKEAWAY</span></div><h2 id="conclusion-title" class="section-title reveal">Awareness is your first line of defense</h2><div class="flow-line reveal"><div><span>01</span><strong>What it is</strong></div><i>→</i><div><span>02</span><strong>Common threats</strong></div><i>→</i><div><span>03</span><strong>Impact</strong></div><i>→</i><div><span>04</span><strong>Protect and respond</strong></div></div><p class="closing-line reveal">A five-second pause to verify keeps you in control.</p><div class="engagement-grid"><div class="quiz-card reveal"><div class="card-top"><span>FIELD TEST / 05 QUESTIONS</span><span id="quiz-progress">01 / 05</span></div><h3>Test your cyber instincts</h3><div id="quiz-content"></div><div class="quiz-footer"><span id="quiz-feedback" aria-live="polite"></span><button type="button" class="text-button" id="quiz-next">Next question <span>→</span></button></div></div><div class="pledge-card reveal"><span class="pledge-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 40 11v13c0 11-6.7 18.2-16 22-9.3-3.8-16-11-16-22V11l16-6Z"/><path d="m15 25 6 6 12-13"/></svg></span><p class="eyebrow">YOUR NEXT MOVE</p><h3>I will pause, verify and act.</h3><p>Make the habit visible. Your pledge is counted on this exhibition device when the backend is available.</p><button type="button" class="button button-primary" id="pledge-button">Pledge this habit <span aria-hidden="true">↗</span></button><span class="pledge-count" id="pledge-count" aria-live="polite">0 people have pledged</span></div></div></div>
+    </section>
+
+    <section class="fb-section" id="feedback" aria-labelledby="feedback-title">
+      <div class="fb-shell"><div class="fb-kicker">EXHIBITION FEEDBACK / LAST STOP</div><div class="fb-heading"><div><h2 id="feedback-title">Rate the Exhibition</h2><p>Scan with your phone camera</p></div><span class="fb-isolated">FEEDBACK ISOLATED</span></div><div class="fb-content"><div class="fb-form-card" id="feedback-form"><div class="fb-form-intro"><span class="fb-form-index">FEEDBACK / 01</span><h3>Help us tune the next briefing.</h3><p>This native fallback keeps every response in one simple place. No sign-in required.</p></div><form id="feedback-native-form" novalidate><div class="fb-field"><label for="fb-full-name">Full name <span>*</span></label><input id="fb-full-name" name="fullName" type="text" autocomplete="name" required placeholder="Your name"><span class="fb-error" data-error-for="fb-full-name"></span></div><div class="fb-rating-grid"><div class="fb-field"><label for="fb-exhibition-rating">Rating of the exhibition <span>*</span></label><select id="fb-exhibition-rating" name="exhibitionRating" required><option value="">Choose 1–5</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div class="fb-field"><label for="fb-website-rating">Rating of the website <span>*</span></label><select id="fb-website-rating" name="websiteRating" required><option value="">Choose 1–5</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div class="fb-field"><label for="fb-vibes-rating">Vibes rating <span>*</span></label><select id="fb-vibes-rating" name="vibesRating" required><option value="">Choose 1–5</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div><div class="fb-field"><label for="fb-favorite">Favorite section <span class="fb-optional">optional</span></label><select id="fb-favorite" name="favoriteSection"><option value="">Choose a section</option><option>Definition &amp; Reality</option><option>Three threats</option><option>Spot the phish</option><option>Identity theft</option><option>Malware</option><option>Prevention</option><option>Incident response</option><option>Test your cyber instincts</option></select></div><div class="fb-field"><label for="fb-comments">Comments <span class="fb-optional">optional</span></label><textarea id="fb-comments" name="comments" rows="3" placeholder="What stayed with you?"></textarea></div><button class="button button-primary fb-submit" type="submit">Send feedback <span aria-hidden="true">↗</span></button><p class="fb-form-status" id="fb-form-status" aria-live="polite"></p></form><div class="fb-thanks" id="fb-thanks" hidden><span class="fb-thanks-mark">✓</span><h3>Thank you for the signal.</h3><p>Your feedback has been recorded for this exhibition session.</p><button type="button" class="text-button" id="fb-again">Send another response <span>↗</span></button></div></div><div class="fb-qr-column"><div class="fb-qr-card"><div class="fb-qr-copy"><span class="fb-qr-label">QR / 01</span><h3>Rate the exhibition, our website and the vibes</h3><p>Point your camera here to open the feedback form.</p><a class="fb-link-button" href="#feedback-form">Open the feedback form <span>↗</span></a></div><div class="fb-qr-frame"><div class="fb-qr" id="feedback-qr" aria-label="QR code for the feedback form"></div><button type="button" class="fb-download" data-download-qr="feedback-qr">Download QR</button></div></div><div class="fb-qr-card"><div class="fb-qr-copy"><span class="fb-qr-label">QR / 02</span><h3>Open this website</h3><p>Keep the briefing on your phone and share it with someone else.</p><span class="fb-url" id="site-url-label">Current exhibition</span></div><div class="fb-qr-frame"><div class="fb-qr" id="website-qr" aria-label="QR code for this website"></div><button type="button" class="fb-download" data-download-qr="website-qr">Download QR</button></div></div></div></div><div class="fb-footer"><span>Rate the exhibition</span><span>Plain language. Practical habits.</span><a href="#hero">Back to start ↑</a></div></div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
