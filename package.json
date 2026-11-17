@@ -5,9 +5,9 @@
   "type": "module",
   "allowScripts": {},
   "scripts": {
-    "dev": "node server.mjs",
-    "start": "node server.mjs",
-    "build": "node -e \"console.log('Static-first build: source files are ready for the managed container.')\""
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs",
+    "build": "node -e \"\""
   },
   "engines": {
     "node": ">=20"

@@ -1,5 +1,8 @@
 .work/
 node_modules/
 *.log
+.vercel
+
+.vercel
 
 .vercel
