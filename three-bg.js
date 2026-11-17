@@ -27,21 +27,26 @@
       }
 
       const isMobile = window.innerWidth < 768;
-      // 350k on desktop, 180k on mobile for hero overlay
-      const particleTarget = isMobile ? 180000 : 350000;
+      // 260k on desktop, 130k on mobile for hero overlay
+      const particleTarget = isMobile ? 130000 : 260000;
 
       const sim = new window.Galaxy1Simulation(container, {
         particles: particleTarget,
         theme: 'cybersafe',
-        exposure: 1.25,
-        cameraDistance: 5.8,
-        cameraAngle: 35.1,
-        cameraHeight: 22.0
+        exposure: 0.72,
+        brightness: 0.65,
+        sparkle: 0.45,
+        size: 0.88,
+        cameraDistance: 6.5,
+        cameraAngle: 38.0,
+        cameraHeight: 24.0,
+        transparentBackground: true
       });
 
       if (sim && sim.canvas) {
-        sim.canvas.style.zIndex = '-1';
-        sim.canvas.style.opacity = '0.92';
+        sim.canvas.style.zIndex = '0';
+        sim.canvas.style.opacity = '0.52';
+        sim.canvas.style.filter = 'brightness(0.65) saturate(0.9)';
         sim.canvas.style.pointerEvents = 'none';
       }
     } catch (e) {

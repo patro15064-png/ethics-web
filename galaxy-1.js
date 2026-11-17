@@ -120,7 +120,9 @@
 
       // Scene & Camera
       this.scene = new THREE.Scene();
-      this.scene.background = new THREE.Color(0x000000);
+      if (!this.options.transparentBackground) {
+        this.scene.background = new THREE.Color(0x000000);
+      }
 
       this.camera = new THREE.PerspectiveCamera(this.options.cameraFov, this.width / this.height, 0.1, 100);
       this.updateCameraPosition();
