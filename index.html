@@ -202,11 +202,70 @@
     <section class="section content-section threat-section" id="threats" data-section="threats" aria-labelledby="threats-title">
       <div class="section-inner">
         <div class="section-kicker reveal"><span>02</span><span>THE PATTERN LIBRARY</span></div>
-        <div class="section-heading-row"><div><h2 id="threats-title" class="section-title reveal">Three threats you are most likely to meet</h2><p class="intro-line reveal">Almost every consumer cyber incident starts with one of these three common tactics.</p></div><span class="heading-mark reveal" aria-hidden="true">03 / 03</span></div>
+        <div class="section-heading-row">
+          <div>
+            <h2 id="threats-title" class="section-title reveal">Three threats you are most likely to meet</h2>
+            <p class="intro-line reveal">Almost every consumer cyber incident starts with one of these three common tactics.</p>
+          </div>
+          <span class="heading-mark reveal" aria-hidden="true">03 / 03 CORE PATTERNS</span>
+        </div>
         <div class="threat-grid">
-          <article class="threat-card threat-phishing reveal"><div class="card-top"><span class="threat-number">01</span><span class="card-arrow">↗</span></div><span class="icon-block" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 12h32v24H8zM8 13l16 13 16-13"/><path d="M31 33 39 41M34 28l8 8"/></svg></span><h3>Phishing</h3><p class="goal-label">GOAL</p><p>Steal passwords or banking credentials.</p><span class="card-line"></span></article>
-          <article class="threat-card threat-identity reveal"><div class="card-top"><span class="threat-number">02</span><span class="card-arrow">↗</span></div><span class="icon-block" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="7"/><path d="M11 39c2-8 6.3-12 13-12s11 4 13 12M35 10l5 5-5 5"/></svg></span><h3>Identity theft</h3><p class="goal-label">GOAL</p><p>Open loans, credit lines or drain assets.</p><span class="card-line"></span></article>
-          <article class="threat-card threat-malware reveal"><div class="card-top"><span class="threat-number">03</span><span class="card-arrow">↗</span></div><span class="icon-block" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M15 18h18v16H15zM20 12v6M28 12v6M20 34v4M28 34v4M9 23h6M33 23h6M9 29h6M33 29h6"/><path d="m24 23 3 4-4 4-3-4 4-4Z"/></svg></span><h3>Malware</h3><p class="goal-label">GOAL</p><p>Hijack devices or extort ransom payments.</p><span class="card-line"></span></article>
+          <article class="threat-card threat-phishing reveal">
+            <div class="card-top">
+              <span class="threat-number">01</span>
+              <span class="threat-badge red">THREAT: CRITICAL</span>
+              <span class="card-arrow">↗</span>
+            </div>
+            <span class="icon-block" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M8 12h32v24H8zM8 13l16 13 16-13"/><path d="M31 33 39 41M34 28l8 8"/></svg>
+            </span>
+            <h3>Phishing</h3>
+            <p class="goal-label">PRIMARY OBJECTIVE</p>
+            <p>Steal login passwords, session tokens, or banking credentials through fraudulent urgency.</p>
+            <div class="threat-stat-strip">
+              <span><strong>41%</strong> of all cyber incidents</span>
+              <span class="status-pulse red"></span>
+            </div>
+            <span class="card-line"></span>
+          </article>
+
+          <article class="threat-card threat-identity reveal">
+            <div class="card-top">
+              <span class="threat-number">02</span>
+              <span class="threat-badge cyan">THREAT: SEVERE</span>
+              <span class="card-arrow">↗</span>
+            </div>
+            <span class="icon-block" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="7"/><path d="M11 39c2-8 6.3-12 13-12s11 4 13 12M35 10l5 5-5 5"/></svg>
+            </span>
+            <h3>Identity Theft</h3>
+            <p class="goal-label">PRIMARY OBJECTIVE</p>
+            <p>Impersonate you to open fraudulent lines of credit, hijack phone numbers, or drain assets.</p>
+            <div class="threat-stat-strip">
+              <span><strong>$1,400+</strong> avg. victim loss</span>
+              <span class="status-pulse cyan"></span>
+            </div>
+            <span class="card-line"></span>
+          </article>
+
+          <article class="threat-card threat-malware reveal">
+            <div class="card-top">
+              <span class="threat-number">03</span>
+              <span class="threat-badge lime">THREAT: HIGH</span>
+              <span class="card-arrow">↗</span>
+            </div>
+            <span class="icon-block" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M15 18h18v16H15zM20 12v6M28 12v6M20 34v4M28 34v4M9 23h6M33 23h6M9 29h6M33 29h6"/><path d="m24 23 3 4-4 4-3-4 4-4Z"/></svg>
+            </span>
+            <h3>Malware</h3>
+            <p class="goal-label">PRIMARY OBJECTIVE</p>
+            <p>Silently spy on keystrokes, capture webcams, lock personal files, or extort ransom payments.</p>
+            <div class="threat-stat-strip">
+              <span><strong>560k</strong> new samples daily</span>
+              <span class="status-pulse lime"></span>
+            </div>
+            <span class="card-line"></span>
+          </article>
         </div>
       </div>
     </section>
@@ -214,32 +273,341 @@
     <section class="section content-section phish-section" id="phishing" data-section="phishing" aria-labelledby="phishing-title">
       <div class="section-inner split-layout demo-layout">
         <div class="section-kicker reveal"><span>03</span><span>THREAT 01 / PHISHING</span></div>
-        <div class="section-main"><h2 id="phishing-title" class="section-title reveal">Phishing is a fake message that looks real</h2><p class="lead reveal">It exploits trust and emotion, not device vulnerabilities.</p><div class="rule-line reveal"></div>
-          <div class="red-flag-list"><div class="red-flag reveal"><span>01</span><div><h3>Familiar sender</h3><p>The name may look right while the address tells a different story.</p></div></div><div class="red-flag reveal"><span>02</span><div><h3>Urgency</h3><p>Pressure makes a quick click feel safer than a pause.</p></div></div><div class="red-flag reveal"><span>03</span><div><h3>The trap</h3><p>A link or attachment asks for the one thing it should never need.</p></div></div></div>
-          <p class="rule-of-thumb reveal"><span class="quote-mark">“</span>Legitimate organizations will not threaten account deletion over an unprompted SMS link.</p>
+        <div class="section-main">
+          <h2 id="phishing-title" class="section-title reveal">Phishing is a fake message that looks real</h2>
+          <p class="lead reveal">It exploits trust, fear, and urgency — bypassing cybersecurity tech by hacking human psychology.</p>
+          <div class="rule-line reveal"></div>
+          <div class="red-flag-list">
+            <div class="red-flag reveal">
+              <span class="flag-num">01</span>
+              <div>
+                <span class="flag-badge">SPOOFED SENDER</span>
+                <h3>Familiar name, fraudulent address</h3>
+                <p>The visible name says your bank or shipping courier, while the actual domain beneath is misspelled or totally unrelated.</p>
+              </div>
+            </div>
+            <div class="red-flag reveal">
+              <span class="flag-num">02</span>
+              <div>
+                <span class="flag-badge">PANIC INDUCTION</span>
+                <h3>Artificial urgency &amp; threats</h3>
+                <p>Deadlines like <em>"Account closes in 24 hours"</em> force rapid emotional clicking instead of rational verification.</p>
+              </div>
+            </div>
+            <div class="red-flag reveal">
+              <span class="flag-num">03</span>
+              <div>
+                <span class="flag-badge">CREDENTIAL HARVEST</span>
+                <h3>The deceptive destination</h3>
+                <p>The link leads to an identical-looking fake login portal created to capture your username, password, and OTP code.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rule-of-thumb-card reveal">
+            <div class="rule-thumb-header">
+              <span class="thumb-icon">🛡️</span>
+              <span class="thumb-kicker">GOLDEN RULE OF THUMB</span>
+            </div>
+            <p>“Legitimate banks, government bodies, and delivery services will never demand sensitive credentials or threaten account deletion over an unprompted SMS link.”</p>
+          </div>
         </div>
-        <div class="demo-panel reveal" aria-label="Spot the phish interactive demo"><div class="demo-label">SPOT THE PHISH <span>Tap the clues</span></div><div class="phone-frame"><div class="phone-speaker"></div><div class="phone-screen"><div class="phone-status"><span>9:41</span><span>▮▮▮</span></div><div class="notification"><span class="notif-app">MYBANK</span><strong>Security alert</strong><button type="button" class="phish-hotspot" data-flag="sender" aria-label="Inspect sender address">mybank-security.co</button><button type="button" class="phish-hotspot" data-flag="urgent" aria-label="Inspect urgent wording">Your account will be deleted today.</button><button type="button" class="phish-hotspot phish-link" data-flag="link" aria-label="Inspect suspicious link">VERIFY NOW&nbsp; →</button></div><div class="demo-note" id="phish-note" aria-live="polite">Start with any highlighted-looking detail.</div></div></div><div class="demo-result" id="phish-result"><span>0 / 3</span> red flags found</div></div>
+
+        <div class="demo-panel reveal" aria-label="Spot the phish interactive demo">
+          <div class="demo-label">
+            <span>LIVE INTERACTIVE SIMULATOR</span>
+            <span class="tap-hint">Tap the clues below</span>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen">
+              <div class="phone-status"><span>9:41</span><span class="status-icons">5G ▮▮▮</span></div>
+              <div class="notification">
+                <div class="notif-header">
+                  <span class="notif-app">ALERT // SECURE-BANK</span>
+                  <span class="notif-time">NOW</span>
+                </div>
+                <strong>Critical Security Alert</strong>
+                <button type="button" class="phish-hotspot" data-flag="sender" aria-label="Inspect sender address">mybank-security.co</button>
+                <button type="button" class="phish-hotspot" data-flag="urgent" aria-label="Inspect urgent wording">Your account will be deleted today.</button>
+                <button type="button" class="phish-hotspot phish-link" data-flag="link" aria-label="Inspect suspicious link">VERIFY NOW&nbsp; →</button>
+              </div>
+              <div class="demo-note" id="phish-note" aria-live="polite">Tap any highlighted red flag on the simulated phone screen above.</div>
+            </div>
+          </div>
+          <div class="demo-result" id="phish-result"><span>0 / 3</span> red flags found</div>
+        </div>
       </div>
     </section>
 
-    <section class="section content-section" id="identity" data-section="identity" aria-labelledby="identity-title">
-      <div class="section-inner split-layout identity-layout"><div class="section-kicker reveal"><span>04</span><span>THREAT 02 / IDENTITY</span></div><div class="section-main"><h2 id="identity-title" class="section-title reveal">Identity theft turns your details into someone else's tool</h2><div class="rule-line reveal"></div><div class="identity-columns"><article class="identity-card reveal"><span class="identity-icon">⌁</span><h3>What thieves collect</h3><p>Names, addresses, dates of birth, account numbers and the small details that make a fake story believable.</p></article><article class="identity-card reveal"><span class="identity-icon">↗</span><h3>How identity is used</h3><p>Details can become a loan application, a new credit line, a fake support call or a way into an existing account.</p></article><article class="identity-card reveal"><span class="identity-icon">◷</span><h3>Delayed discovery</h3><p>The first clue may arrive as a bill, a credit check or a notification you do not recognize.</p></article></div><p class="side-note reveal"><span class="note-marker"></span> The risk is not only what a criminal knows. It is what they can make someone else believe.</p></div></div>
+    <section class="section content-section identity-section" id="identity" data-section="identity" aria-labelledby="identity-title">
+      <div class="section-inner">
+        <div class="section-kicker reveal"><span>04</span><span>THREAT 02 / IDENTITY</span></div>
+        <div class="section-title-wrap reveal">
+          <h2 id="identity-title" class="section-title reveal-title">Identity theft turns your details into someone else's weapon</h2>
+          <p class="definition-lead">The risk is not only what an attacker knows about you. It is what they can convince institutions to authorize in your name.</p>
+        </div>
+
+        <div class="identity-flow-strip reveal">
+          <div class="flow-step">
+            <span class="step-num">01</span>
+            <strong>Data Breach Leak</strong>
+            <small>Credentials leaked from third-party sites</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <span class="step-num">02</span>
+            <strong>Darknet Resale</strong>
+            <small>Profiles bundled with credit records</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <span class="step-num">03</span>
+            <strong>Credential Stuffing</strong>
+            <small>Automated login bots attack all accounts</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step highlight">
+            <span class="step-num">04</span>
+            <strong>Synthetic Fraud</strong>
+            <small>Loans &amp; credit cards opened in your name</small>
+          </div>
+        </div>
+
+        <div class="identity-columns">
+          <article class="identity-card reveal">
+            <div class="id-card-top">
+              <span class="id-badge cyan">INGESTION</span>
+              <span class="identity-icon">⌁</span>
+            </div>
+            <h3>What thieves harvest</h3>
+            <p>Full names, phone numbers, home addresses, dates of birth, national identity numbers, and personal details that make impersonation indistinguishable from reality.</p>
+            <div class="id-meta">Target: Personal Data Aggregation</div>
+          </article>
+
+          <article class="identity-card reveal">
+            <div class="id-card-top">
+              <span class="id-badge lime">MONETIZATION</span>
+              <span class="identity-icon">↗</span>
+            </div>
+            <h3>How identity is weaponized</h3>
+            <p>Stolen profiles become unauthorized bank loans, synthetic credit card applications, fraudulent tax refund claims, and convincing calls to customer support.</p>
+            <div class="id-meta">Target: Capital Extraction</div>
+          </article>
+
+          <article class="identity-card reveal">
+            <div class="id-card-top">
+              <span class="id-badge danger">DWELL TIME</span>
+              <span class="identity-icon">◷</span>
+            </div>
+            <h3>Delayed discovery trap</h3>
+            <p>Unlike a stolen physical wallet, identity theft can operate undetected for months. The first warning often arrives as debt collector notices or damaged credit reports.</p>
+            <div class="id-meta">Average Detection: 180+ Days</div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section content-section malware-section" id="malware" data-section="malware" aria-labelledby="malware-title">
-      <div class="section-inner split-layout"><div class="section-kicker reveal"><span>05</span><span>THREAT 03 / MALWARE</span></div><div class="section-main"><h2 id="malware-title" class="section-title reveal">Malware is software built to harm or spy</h2><div class="rule-line reveal"></div><div class="tab-switcher reveal" role="tablist" aria-label="Types of malware"><button type="button" role="tab" aria-selected="true" aria-controls="tab-virus" id="tab-button-virus" data-tab="virus">Viruses &amp; Trojans</button><button type="button" role="tab" aria-selected="false" aria-controls="tab-spy" id="tab-button-spy" data-tab="spy">Spyware &amp; Keyloggers</button><button type="button" role="tab" aria-selected="false" aria-controls="tab-ransom" id="tab-button-ransom" data-tab="ransom">Ransomware</button></div><div class="tab-panels"><article class="tab-panel is-active" role="tabpanel" tabindex="0" id="tab-virus" data-panel="virus"><span class="panel-number">01</span><h3>Viruses &amp; Trojans</h3><p>Malicious code can hide inside a file or pretend to be a useful app. Once opened, it may spread or invite more unwanted software.</p></article><article class="tab-panel" role="tabpanel" tabindex="0" id="tab-spy" data-panel="spy"><span class="panel-number">02</span><h3>Spyware &amp; Keyloggers</h3><p>Spyware watches activity. Keyloggers record what is typed, including passwords and private messages.</p></article><article class="tab-panel" role="tabpanel" tabindex="0" id="tab-ransom" data-panel="ransom"><span class="panel-number">03</span><h3>Ransomware</h3><p>Ransomware locks files or systems and demands payment. Paying does not guarantee a safe return.</p></article></div><p class="infection-line reveal"><span>ROUTES IN</span> Unexpected attachments <i>·</i> Fake updates <i>·</i> Untrusted downloads <i>·</i> Compromised accounts</p></div></div>
+      <div class="section-inner split-layout">
+        <div class="section-kicker reveal"><span>05</span><span>THREAT 03 / MALWARE</span></div>
+        <div class="section-main">
+          <h2 id="malware-title" class="section-title reveal">Malware is software engineered to harm, spy, or extort</h2>
+          <p class="lead reveal">Malicious payloads run invisibly in background processes, waiting to harvest sensitive data or encrypt your storage.</p>
+          <div class="rule-line reveal"></div>
+
+          <div class="tab-switcher reveal" role="tablist" aria-label="Types of malware">
+            <button type="button" role="tab" aria-selected="true" aria-controls="tab-virus" id="tab-button-virus" data-tab="virus"><span class="tab-dot red"></span>Viruses &amp; Trojans</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="tab-spy" id="tab-button-spy" data-tab="spy"><span class="tab-dot cyan"></span>Spyware &amp; Keyloggers</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="tab-ransom" id="tab-button-ransom" data-tab="ransom"><span class="tab-dot lime"></span>Ransomware Extortion</button>
+          </div>
+
+          <div class="tab-panels">
+            <article class="tab-panel is-active" role="tabpanel" tabindex="0" id="tab-virus" data-panel="virus">
+              <div class="panel-header">
+                <span class="panel-number">VECTOR 01</span>
+                <span class="panel-tag red">DISGUISED EXECUTABLES</span>
+              </div>
+              <h3>Viruses &amp; Trojan Horses</h3>
+              <p>Malicious code masquerades as innocent PDF receipts, game mods, or essential software updates. Once executed, it opens secret backdoors for remote cybercriminals to access your system.</p>
+              <div class="panel-vector-box">
+                <span class="box-lbl">PRIMARY DELIVERY:</span>
+                <code>email_attachment.exe</code> · <code>invoice_update.scr</code> · <code>pirated_installer.zip</code>
+              </div>
+            </article>
+
+            <article class="tab-panel" role="tabpanel" tabindex="0" id="tab-spy" data-panel="spy">
+              <div class="panel-header">
+                <span class="panel-number">VECTOR 02</span>
+                <span class="panel-tag cyan">SILENT SURVEILLANCE</span>
+              </div>
+              <h3>Spyware &amp; Keyloggers</h3>
+              <p>Operates with zero noticeable lag. Keyloggers record every keystroke — including usernames, master passwords, and credit card numbers — and transmit them silently to remote control servers.</p>
+              <div class="panel-vector-box">
+                <span class="box-lbl">PRIMARY TARGET:</span>
+                <code>browser_passwords.db</code> · <code>clipboard_stream</code> · <code>webcam_feed</code>
+              </div>
+            </article>
+
+            <article class="tab-panel" role="tabpanel" tabindex="0" id="tab-ransom" data-panel="ransom">
+              <div class="panel-header">
+                <span class="panel-number">VECTOR 03</span>
+                <span class="panel-tag lime">SYSTEM HOSTAGE</span>
+              </div>
+              <h3>Ransomware Extortion</h3>
+              <p>Silently encrypts your photos, documents, and system drives with military-grade AES-256 ciphers. Demands cryptocurrency payments with an extortion countdown timer. Paying never guarantees recovery.</p>
+              <div class="panel-vector-box">
+                <span class="box-lbl">TACTIC:</span>
+                <code>files_encrypted_with_aes</code> · <code>extortion_deadline_48h</code>
+              </div>
+            </article>
+          </div>
+
+          <div class="infection-vector-chips reveal">
+            <span class="chips-title">COMMON INFECTION GATEWAYS:</span>
+            <span class="chip">Phishing Attachments</span>
+            <span class="chip">Fake Browser Updates</span>
+            <span class="chip">Cracked Software</span>
+            <span class="chip">Infected USB Drives</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section content-section impact-section" id="impact" data-section="impact" aria-labelledby="impact-title">
-      <div class="section-inner impact-inner"><div class="section-kicker reveal"><span>06</span><span>IMPACT</span></div><h2 id="impact-title" class="section-title reveal">The cost is financial and personal</h2><div class="impact-grid"><article class="impact-card reveal"><span class="impact-figure">01</span><h3>Financial damage</h3><p>Stolen money, unauthorized purchases, recovery costs and time spent proving what happened.</p></article><article class="impact-card reveal"><span class="impact-figure">02</span><h3>Personal toll</h3><p>Victims often find the loss of time, security and peace of mind more painful than the initial financial hit.</p></article></div><p class="anyone-line reveal">Anyone can be targeted, whatever their background, age or job.</p></div>
+      <div class="section-inner impact-inner">
+        <div class="section-kicker reveal"><span>06</span><span>IMPACT ANALYSIS</span></div>
+        <h2 id="impact-title" class="section-title reveal">The toll is both financial and deeply psychological</h2>
+        <p class="intro-line reveal" style="text-align:center;max-width:38rem;margin:1rem auto 3rem;">Security breaches do not end when unauthorized transactions are stopped. The aftermath takes weeks or months to resolve.</p>
+        <div class="impact-grid">
+          <article class="impact-card reveal">
+            <div class="impact-header">
+              <span class="impact-figure">01</span>
+              <span class="impact-pill red">FINANCIAL DAMAGE</span>
+            </div>
+            <h3>Monetary Losses &amp; Disruption</h3>
+            <p>Directly drained bank balances, fraudulent credit charges, legal consultation fees, credit repair services, and weeks of disputed recovery claims.</p>
+            <div class="impact-metric">
+              <span class="metric-val">$1,800+</span>
+              <span class="metric-lbl">Average out-of-pocket loss per victim</span>
+            </div>
+          </article>
+
+          <article class="impact-card reveal">
+            <div class="impact-header">
+              <span class="impact-figure">02</span>
+              <span class="impact-pill cyan">PERSONAL TOLL</span>
+            </div>
+            <h3>Psychological Toll &amp; Violated Trust</h3>
+            <p>Victims consistently report feeling violated, anxious, and distressed. Reclaiming control of compromised social accounts and credit scores takes an emotional toll far beyond the initial money lost.</p>
+            <div class="impact-metric">
+              <span class="metric-val">200+ Hours</span>
+              <span class="metric-lbl">Average personal time spent resolving identity disputes</span>
+            </div>
+          </article>
+        </div>
+        <div class="anyone-card reveal">
+          <span class="anyone-icon">⚡</span>
+          <span>Anyone can be targeted — regardless of age, technical skill, or profession. The difference between safety and compromise is habit.</span>
+        </div>
+      </div>
     </section>
 
     <section class="section content-section prevention-section" id="prevention" data-section="prevention" aria-labelledby="prevention-title">
-      <div class="section-inner"><div class="section-kicker reveal"><span>07</span><span>PREVENTION</span></div><div class="section-heading-row"><div><h2 id="prevention-title" class="section-title reveal">Three habits block most attacks</h2><p class="intro-line reveal">Small pauses and routine updates remove the easiest openings.</p></div><span class="shield-stamp reveal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 40 11v13c0 11-6.7 18.2-16 22-9.3-3.8-16-11-16-22V11l16-6Z"/><path d="m15 25 6 6 12-13"/></svg></span></div><div class="habit-list"><article class="habit-row reveal"><div class="habit-count">01</div><div class="habit-copy"><h3>Use unique, strong passwords</h3><p>Use a password manager and 16+ character passphrases.</p></div><span class="habit-end">LOCK</span></article><article class="habit-row reveal"><div class="habit-count">02</div><div class="habit-copy"><h3>Pause before you click</h3><p>Check the sender, the request and the destination before you respond.</p></div><span class="habit-end">PAUSE</span></article><article class="habit-row reveal"><div class="habit-count">03</div><div class="habit-copy"><h3>Apply system updates promptly</h3><p>Updates close known gaps before they become someone else's shortcut.</p></div><span class="habit-end">PATCH</span></article></div></div>
+      <div class="section-inner">
+        <div class="section-kicker reveal"><span>07</span><span>DEFENSE PROTOCOLS</span></div>
+        <div class="section-heading-row">
+          <div>
+            <h2 id="prevention-title" class="section-title reveal">Three daily habits block 99% of cyber attacks</h2>
+            <p class="intro-line reveal">Complex software is secondary. Disciplined verification and routine hygiene defeat almost every attack.</p>
+          </div>
+          <span class="shield-stamp reveal" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 5 40 11v13c0 11-6.7 18.2-16 22-9.3-3.8-16-11-16-22V11l16-6Z"/><path d="m15 25 6 6 12-13"/></svg>
+          </span>
+        </div>
+
+        <div class="habit-grid">
+          <article class="habit-card reveal">
+            <div class="habit-top">
+              <span class="habit-count">PROTOCOL 01</span>
+              <span class="habit-end lock">LOCK</span>
+            </div>
+            <h3>Unique, strong passwords &amp; MFA</h3>
+            <p>Never reuse passwords across accounts. Use a password manager with 16+ character passphrases, and activate two-factor authentication (authenticator app) everywhere.</p>
+            <div class="habit-stat">Blocks 99.6% of automated bot attacks</div>
+          </article>
+
+          <article class="habit-card reveal">
+            <div class="habit-top">
+              <span class="habit-count">PROTOCOL 02</span>
+              <span class="habit-end pause">PAUSE</span>
+            </div>
+            <h3>A 5-second pause before you tap</h3>
+            <p>Urgency is the attacker's best weapon. Check the sender, inspect the full web address, and navigate independently to the official app or website instead of tapping links.</p>
+            <div class="habit-stat">Neutralizes 90%+ of phishing traps</div>
+          </article>
+
+          <article class="habit-card reveal">
+            <div class="habit-top">
+              <span class="habit-count">PROTOCOL 03</span>
+              <span class="habit-end patch">PATCH</span>
+            </div>
+            <h3>Install system updates promptly</h3>
+            <p>Security patches eliminate known vulnerabilities before attackers weaponize them against you. Turn on automatic OS and browser updates on all your devices.</p>
+            <div class="habit-stat">Closes 85%+ of known software exploits</div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section content-section response-section" id="response" data-section="response" aria-labelledby="response-title">
-      <div class="section-inner"><div class="section-kicker reveal"><span>08</span><span>INCIDENT RESPONSE</span></div><h2 id="response-title" class="section-title reveal">If something feels off, act fast</h2><p class="lead reveal">Speed matters: banks may be able to recall transfers within the first few hours.</p><div class="timeline"><article class="timeline-step reveal"><div class="timeline-node">1</div><div><span class="step-label">STEP 1</span><h3>Stop immediately</h3><p>Do not click again, reply, or send more information. Screenshot the message if it helps you explain what happened.</p></div></article><article class="timeline-step reveal"><div class="timeline-node">2</div><div><span class="step-label">STEP 2</span><h3>Change credentials</h3><p>Start with the affected account, then secure reused passwords and turn on multi-factor authentication.</p></div></article><article class="timeline-step reveal"><div class="timeline-node">3</div><div><span class="step-label">STEP 3</span><h3>Notify and report</h3><p>Contact your bank or service, tell someone you trust, and report the incident through the relevant channel.</p></div></article></div></div>
+      <div class="section-inner">
+        <div class="section-kicker reveal"><span>08</span><span>INCIDENT RESPONSE</span></div>
+        <div class="section-heading-row">
+          <div>
+            <h2 id="response-title" class="section-title reveal">If something feels suspicious, act decisively</h2>
+            <p class="lead reveal">Speed is critical: financial institutions can often halt or reverse transfers within the initial few hours.</p>
+          </div>
+          <span class="emergency-badge reveal">RAPID RESPONSE PROTOCOL</span>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-step reveal">
+            <div class="timeline-node">1</div>
+            <div class="timeline-body">
+              <div class="step-meta">
+                <span class="step-label">T + 0 MIN</span>
+                <span class="step-chip red">IMMEDIATE ACTION</span>
+              </div>
+              <h3>Sever connection &amp; stop clicking</h3>
+              <p>Do not reply, send codes, or click further. If malware is suspected, disconnect Wi-Fi and mobile data. Take a screenshot for evidence if it helps report the incident.</p>
+            </div>
+          </article>
+
+          <article class="timeline-step reveal">
+            <div class="timeline-node">2</div>
+            <div class="timeline-body">
+              <div class="step-meta">
+                <span class="step-label">T + 15 MIN</span>
+                <span class="step-chip cyan">CONTAINMENT</span>
+              </div>
+              <h3>Change credentials &amp; kill active sessions</h3>
+              <p>Immediately change passwords from a separate, secure device. Log out of all active sessions, update reused credentials, and turn on authenticator-based 2FA.</p>
+            </div>
+          </article>
+
+          <article class="timeline-step reveal">
+            <div class="timeline-node">3</div>
+            <div class="timeline-body">
+              <div class="step-meta">
+                <span class="step-label">T + 60 MIN</span>
+                <span class="step-chip lime">NOTIFICATION</span>
+              </div>
+              <h3>Freeze accounts &amp; notify authorities</h3>
+              <p>Call your bank or credit card fraud department immediately to freeze affected cards. File a formal cybercrime report with national authorities and monitor credit reports.</p>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section content-section conclusion-section" id="conclusion" data-section="conclusion" aria-labelledby="conclusion-title">
