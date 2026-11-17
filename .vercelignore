@@ -4,3 +4,7 @@ Dockerfile.manus
 .manus-webdev
 manus-webdev.json
 dev-server.mjs
+api
+package.json
+package-lock.json
+.npmrc
