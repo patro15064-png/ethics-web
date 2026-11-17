@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "allowScripts": {},
   "scripts": {
     "dev": "node dev-server.mjs",
-    "start": "node dev-server.mjs",
-    "build": "node -e \"\""
+    "start": "node dev-server.mjs"
   },
   "engines": {
     "node": ">=20"

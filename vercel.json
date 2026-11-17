@@ -1,7 +1,9 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "outputDirectory": ".",
   "rewrites": [
+    { "source": "/", "destination": "/index.html" },
     { "source": "/galaxy", "destination": "/galaxy.html" },
     { "source": "/galaxy-1", "destination": "/galaxy.html" },
     { "source": "/admin", "destination": "/admin.html" },
